@@ -387,10 +387,9 @@ library(ggtree)</code></pre>
 ## 
 ## Please cite:
 ## 
-## Shuangbin Xu, Lin Li, Xiao Luo, Meijun Chen, Wenli Tang, Li Zhan, Zehan
-## Dai, Tommy T. Lam, Yi Guan, Guangchuang Yu. Ggtree: A serialized data
-## object for visualization of a phylogenetic tree and annotation data.
-## iMeta 2022, 1(4):e56. doi:10.1002/imt2.56</code></pre>
+## Guangchuang Yu.  Data Integration, Manipulation and Visualization of
+## Phylogenetic Trees (1st edition). Chapman and Hall/CRC. 2022,
+## doi:10.1201/9781003279242, ISBN: 9781032233574</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;ggtree&#39;</code></pre>
 <pre><code>## The following object is masked from &#39;package:tidyr&#39;:
@@ -1143,7 +1142,7 @@ piped_water_tab</code></pre>
 <pre class="r"><code># Import the isolate data
 isolate_data_human &lt;- read.csv(&quot;data/Malawi_ESBL_E_coli_isolates.csv&quot;)
 
-# Label and tidy ESBL isolate data from 2023
+# Label and tidy ESBL isolate data
 isolate_data_human$District &lt;- as.factor(isolate_data_human$District)
 isolate_data_human$Year &lt;- as.factor(isolate_data_human$Year)
 isolate_data_human$ST &lt;- as.factor(isolate_data_human$ST)
@@ -1286,7 +1285,7 @@ ARGs &lt;- read.csv(&quot;data/ARGs.csv&quot;, check.names = FALSE)
 # Remove &#39;.fasta&#39; from all entries in column 1
 ARGs[, 1] &lt;- gsub(&quot;\\.fasta&quot;, &quot;&quot;, ARGs[, 1])
 
-# Apply transformations to all columns except &#39;Isolate&#39; names so ARGs are present (1) or absent (0)
+# Apply transformations to all columns except &#39;Isolate&#39; so ARGs are present (1) or absent (0)
 ARGs[, -1] &lt;- lapply(ARGs[, -1], function(x) {
   ifelse(is.na(x) | x == &quot;.&quot; | x == &quot;&quot;, 0, 1)
 })
@@ -1499,7 +1498,7 @@ plasmids &lt;- read.csv(&quot;data/Plasmid_data.csv&quot;, check.names = FALSE)
 # Remove &#39;.fasta&#39; from all entries in column 1
 plasmids[, 1] &lt;- gsub(&quot;\\.fasta&quot;, &quot;&quot;, plasmids[, 1])
 
-# Apply transformations to all columns except &#39;Isolate&#39; names plasmids are present (1) or absent (0)
+# Apply transformations to all columns except &#39;Isolate&#39; so plasmids are present (1) or absent (0)
 plasmids[, -1] &lt;- lapply(plasmids[, -1], function(x) {
   ifelse(is.na(x) | x == &quot;.&quot; | x == &quot;&quot;, 0, 1)
 })
@@ -1587,7 +1586,7 @@ virulence &lt;- read.csv(&quot;data/virulence.csv&quot;, check.names = FALSE)
 # Remove &#39;.fasta&#39; from all entries in column 1
 virulence[, 1] &lt;- gsub(&quot;\\.fasta&quot;, &quot;&quot;, virulence[, 1])
 
-# Apply transformations to all columns except &#39;Isolate&#39; names so gene names are present (1) or absent (0)
+# Apply transformations to all columns except &#39;Isolate&#39; so gene names are present (1) or absent (0)
 virulence[, -1] &lt;- lapply(virulence[, -1], function(x) {
   ifelse(is.na(x) | x == &quot;.&quot; | x == &quot;&quot;, 0, 1)
 })
@@ -4649,7 +4648,7 @@ abline(h = 0.0001, col = &quot;red&quot;, lty = 2, lwd = 1)</code></pre>
 multihousehold_strains &lt;- c(2, 3, 4, 5, 8, 9, 10, 12, 13, 14, 15, 18, 19, 24, 26,
                             29, 33, 45, 47, 54, 57, 64, 70, 71, 73, 75, 80)
 
-# Define IDs of strains found 3 or more households
+# Define IDs of strains found in 3 or more households
 target_strains &lt;- c(4, 5, 10, 12, 14, 18, 24, 26, 29, 45, 57, 64, 70, 73, 75)
 
 # Define strains found in exactly 2 households
@@ -5357,7 +5356,7 @@ mthawira_strains &lt;- mthawira_strains %&gt;%
     by = &quot;household&quot;
   )
 
-# Convert mthawira household coordinates to sf object and project
+# Convert Mthawira household coordinates to sf object and project
 mthawira_strains_sf &lt;- mthawira_strains %&gt;%
   st_as_sf(coords = c(&quot;GPS_E&quot;, &quot;GPS_S&quot;), crs = 4326)
 
