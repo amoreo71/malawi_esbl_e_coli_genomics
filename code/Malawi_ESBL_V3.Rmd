@@ -538,7 +538,7 @@ chisq.test(piped_water_tab)
 # Import the isolate data
 isolate_data_human <- read.csv("data/Malawi_ESBL_E_coli_isolates.csv")
 
-# Label and tidy ESBL isolate data from 2023
+# Label and tidy ESBL isolate data
 isolate_data_human$District <- as.factor(isolate_data_human$District)
 isolate_data_human$Year <- as.factor(isolate_data_human$Year)
 isolate_data_human$ST <- as.factor(isolate_data_human$ST)
@@ -655,7 +655,7 @@ ARGs <- read.csv("data/ARGs.csv", check.names = FALSE)
 # Remove '.fasta' from all entries in column 1
 ARGs[, 1] <- gsub("\\.fasta", "", ARGs[, 1])
 
-# Apply transformations to all columns except 'Isolate' names so ARGs are present (1) or absent (0)
+# Apply transformations to all columns except 'Isolate' so ARGs are present (1) or absent (0)
 ARGs[, -1] <- lapply(ARGs[, -1], function(x) {
   ifelse(is.na(x) | x == "." | x == "", 0, 1)
 })
@@ -865,7 +865,7 @@ plasmids <- read.csv("data/Plasmid_data.csv", check.names = FALSE)
 # Remove '.fasta' from all entries in column 1
 plasmids[, 1] <- gsub("\\.fasta", "", plasmids[, 1])
 
-# Apply transformations to all columns except 'Isolate' names plasmids are present (1) or absent (0)
+# Apply transformations to all columns except 'Isolate' so plasmids are present (1) or absent (0)
 plasmids[, -1] <- lapply(plasmids[, -1], function(x) {
   ifelse(is.na(x) | x == "." | x == "", 0, 1)
 })
@@ -953,7 +953,7 @@ virulence <- read.csv("data/virulence.csv", check.names = FALSE)
 # Remove '.fasta' from all entries in column 1
 virulence[, 1] <- gsub("\\.fasta", "", virulence[, 1])
 
-# Apply transformations to all columns except 'Isolate' names so gene names are present (1) or absent (0)
+# Apply transformations to all columns except 'Isolate' so gene names are present (1) or absent (0)
 virulence[, -1] <- lapply(virulence[, -1], function(x) {
   ifelse(is.na(x) | x == "." | x == "", 0, 1)
 })
@@ -1365,7 +1365,7 @@ abline(h = 0.0001, col = "red", lty = 2, lwd = 1)
 multihousehold_strains <- c(2, 3, 4, 5, 8, 9, 10, 12, 13, 14, 15, 18, 19, 24, 26,
                             29, 33, 45, 47, 54, 57, 64, 70, 71, 73, 75, 80)
 
-# Define IDs of strains found 3 or more households
+# Define IDs of strains found in 3 or more households
 target_strains <- c(4, 5, 10, 12, 14, 18, 24, 26, 29, 45, 57, 64, 70, 73, 75)
 
 # Define strains found in exactly 2 households
@@ -2007,7 +2007,7 @@ mthawira_strains <- mthawira_strains %>%
     by = "household"
   )
 
-# Convert mthawira household coordinates to sf object and project
+# Convert Mthawira household coordinates to sf object and project
 mthawira_strains_sf <- mthawira_strains %>%
   st_as_sf(coords = c("GPS_E", "GPS_S"), crs = 4326)
 
